@@ -14,6 +14,7 @@ public class Application {
 		
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config/application-context.xml");
 		System.out.println("Spring container started at : "+new Date(ctx.getStartupDate()));
+		
 		((ConfigurableApplicationContext) ctx).registerShutdownHook();
 	}
 }

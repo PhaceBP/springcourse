@@ -12,13 +12,7 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 
 
-	<context:property-placeholder location="classpath:spring-config/application.properties"/>
-	
-	<context:component-scan base-package="hu.ericsson"/>
+	<context:property-placeholder location="classpath:spring-config/application2.properties"/>
 
-	<jdbc:embedded-database type="HSQL">
-		<jdbc:script location="classpath:db/db_schema.sql" />
-	</jdbc:embedded-database>
-	
-
+	<bean class="hu.ericsson.springcourse.model.Customer"/>
 </beans>
