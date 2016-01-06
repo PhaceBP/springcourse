@@ -1,41 +1,46 @@
 package hu.ericsson.springcourse;
 
-import javax.sql.DataSource;
+import java.util.Date;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.env.Environment;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import hu.ericsson.springcourse.model.Customer;
+import hu.ericsson.springcourse.model.GenderType;
+import hu.ericsson.springcourse.service.CustomerService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:/spring-config/application-context.xml" })
 public class FirstUnitTest {
 
-	@Value("${welcome.message}")
-	private String property;
-
 	@Autowired
-	private DataSource ds;
-	
-	
-	@Autowired
-	private Customer cus;
-	
-	@Autowired
-	private Environment env;
+	protected CustomerService service;
 
 	@Test
 	public void testDI() {
 
-		Assert.assertNotNull(ds);
-		Assert.assertNotNull(cus);
-		Assert.assertEquals("Hello World", property);
+		Assert.assertNotNull(service);
+	
+		Customer customer = new Customer();
+		
+		customer.setActive(Boolean.TRUE);
+		customer.setFirstName("firstName");
+		customer.setLastName("last");
+		customer.setIdentityCardNumber("111111");
+		customer.setNameOfMother("sdsdsdsd");
+		customer.setBirthDate(new Date());
+		customer.setGender(GenderType.MALE);
+
+		Long id = service.createCustomer(customer);
+	
+		
+		Assert.assertNotNull(id);
 	}
+	
+	
 
 }
